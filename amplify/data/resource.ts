@@ -19,6 +19,7 @@ const schema = a.schema({
 
   EchoResponse: a.customType({
     content: a.string(),
+    secret: a.string(),
     executionDuration: a.float()
   }),
   echo: a
@@ -27,7 +28,7 @@ const schema = a.schema({
       content: a.string()
     })
     .returns(a.ref('EchoResponse'))
-    .authorization((allow) => [allow.authenticated()])
+    .authorization((allow) => [allow.custom()])
     .handler(a.handler.function(echoHandler))
 });
 
@@ -37,6 +38,11 @@ export const data = defineData({
   schema,
   authorizationModes: {
     defaultAuthorizationMode: "userPool",
+    lambdaAuthorizationMode: {
+      function: defineFunction({
+        entry: './echo-handler/authorizer.ts',
+      }),
+    },
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },
