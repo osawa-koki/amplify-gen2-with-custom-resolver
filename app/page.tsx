@@ -44,9 +44,9 @@ export default function App() {
   }
 
   async function echo() {
-    const response = await client.queries.echo({
-      content: 'hello world!!!'
-    });
+    const response = await client.queries.echo(
+      { content: 'hello world!!!'},
+      { authMode: 'lambda', headers: { Authorization: 'custom-authorized!!!' } });
     window.alert(JSON.stringify(response));
   }
 

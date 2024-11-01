@@ -23,3 +23,4 @@ npm run dev
 ## 参考文献
 
 - [Add custom queries and mutations](https://docs.amplify.aws/nextjs/build-a-backend/data/custom-business-logic/)
+- [Custom data access using Lambda functions](https://docs.amplify.aws/nextjs/build-a-backend/data/customize-authz/custom-data-access-patterns/)

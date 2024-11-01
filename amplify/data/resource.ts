@@ -27,7 +27,7 @@ const schema = a.schema({
       content: a.string()
     })
     .returns(a.ref('EchoResponse'))
-    .authorization((allow) => [allow.authenticated()])
+    .authorization((allow) => [allow.custom()])
     .handler(a.handler.function(echoHandler))
 });
 
@@ -37,6 +37,11 @@ export const data = defineData({
   schema,
   authorizationModes: {
     defaultAuthorizationMode: "userPool",
+    lambdaAuthorizationMode: {
+      function: defineFunction({
+        entry: './authorizer.ts',
+      }),
+    },
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },
