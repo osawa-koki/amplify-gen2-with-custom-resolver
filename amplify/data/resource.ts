@@ -1,4 +1,8 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData, defineFunction } from "@aws-amplify/backend";
+
+const echoHandler = defineFunction({
+  entry: './echo-handler/handler.ts'
+})
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -12,6 +16,19 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
+
+  EchoResponse: a.customType({
+    content: a.string(),
+    executionDuration: a.float()
+  }),
+  echo: a
+    .query()
+    .arguments({
+      content: a.string()
+    })
+    .returns(a.ref('EchoResponse'))
+    .authorization((allow) => [allow.authenticated()])
+    .handler(a.handler.function(echoHandler))
 });
 
 export type Schema = ClientSchema<typeof schema>;

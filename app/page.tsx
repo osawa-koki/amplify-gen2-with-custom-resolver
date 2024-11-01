@@ -43,6 +43,13 @@ export default function App() {
     client.models.Todo.delete({ id })
   }
 
+  async function echo() {
+    const response = await client.queries.echo({
+      content: 'hello world!!!'
+    });
+    window.alert(JSON.stringify(response));
+  }
+
   return (
     <main>
       <h1>{user?.signInDetails?.loginId}'s todos</h1>
@@ -71,6 +78,8 @@ export default function App() {
         </a>
       </div>
       <button onClick={signOut}>Sign out</button>
+      <hr />
+      <button onClick={echo}>Click me!!!</button>
     </main>
   );
 }
