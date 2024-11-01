@@ -19,7 +19,6 @@ const schema = a.schema({
 
   EchoResponse: a.customType({
     content: a.string(),
-    secret: a.string(),
     executionDuration: a.float()
   }),
   echo: a

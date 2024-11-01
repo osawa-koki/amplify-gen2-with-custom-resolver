@@ -27,7 +27,6 @@ export const handler: AppSyncAuthorizerHandler<ResolverContext> = async (
     deniedFields: [
       `arn:aws:appsync:${process.env.AWS_REGION}:${accountId}:apis/${apiId}/types/Event/fields/comments`,
       `Mutation.createEvent`,
-      'EchoResponse.secret'
     ],
     ttlOverride: 300
   };
