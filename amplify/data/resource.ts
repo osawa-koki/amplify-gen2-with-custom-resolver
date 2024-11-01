@@ -40,7 +40,7 @@ export const data = defineData({
     defaultAuthorizationMode: "userPool",
     lambdaAuthorizationMode: {
       function: defineFunction({
-        entry: './echo-handler/authorizer.ts',
+        entry: './authorizer.ts',
       }),
     },
     apiKeyAuthorizationMode: {
